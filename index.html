@@ -8,26 +8,33 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
             text-align: center;
             padding: 20px;
+            background-color: #222;
+            color: #fff;
         }
 
         .container {
-            background-color: #fff;
+            background-color: #333;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             margin: 0 auto;
+            text-align: center;
+            /* Center text within the container */
         }
 
-        input[type="text"] {
+        textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+            padding: 9px 4px;
+            margin: 0 auto;
+            /* Center the textarea within its container */
+            border: 1px solid #555;
             border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            resize: vertical;
         }
 
         button {
@@ -38,19 +45,40 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        a{
+            color: #007BFF;
+            padding: 10px 0px;
+        }
 
         #output {
             margin-top: 20px;
         }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                max-width: 100%;
+                padding: 10px;
+                background-color: #333;
+            }
+        }
     </style>
+
 </head>
 
 <body>
     <div class="container">
         <h1>Get Direct Link</h1>
-        <input type="text" id="inputText" placeholder="Paste Link">
-        <button onclick="pasteFromClipboard()">Paste</button>
-        <button onclick="processString()">Submit</button>
+
+        <form onsubmit="processString(); return false;">
+            <textarea id="inputText" placeholder="Enter a string" rows="4"></textarea>
+            <button onclick="pasteFromClipboard()">Paste</button>
+
+            <button type="submit">Submit</button>
+            <!-- <button onclick="processString()">Submit</button> -->
+        </form>
+
+        <!-- <textarea id="inputText" placeholder="Enter a string" rows="4"></textarea> -->
+
 
         <div id="output"></div>
         <a id="myLink" target="_blank"></a>
@@ -90,14 +118,14 @@
             }
         }
         function pasteFromClipboard() {
-                // Try to paste from clipboard
-                navigator.clipboard.readText().then(function (clipboardText) {
-                    const inputText = document.getElementById('inputText');
-                    inputText.value = clipboardText;
-                }).catch(function (error) {
-                    console.error('Failed to read from clipboard: ', error);
-                });
-            }
+            // Try to paste from clipboard
+            navigator.clipboard.readText().then(function (clipboardText) {
+                const inputText = document.getElementById('inputText');
+                inputText.value = clipboardText;
+            }).catch(function (error) {
+                console.error('Failed to read from clipboard: ', error);
+            });
+        }
 
         // // Example usage
         // const userInput = prompt("Enter a string:"); // You can use any method to get user input in a web context
