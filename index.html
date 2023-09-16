@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool UI Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Get Direct Link</h1>
+        <input type="text" id="inputText" placeholder="Paste Link">
+        <button onclick="pasteFromClipboard()">Paste</button>
+        <button onclick="processString()">Submit</button>
+
+        <div id="output"></div>
+        <a id="myLink" target="_blank"></a>
+
+    </div>
+
+    <script>
+        function processString() {
+            // Find the last '/' in the user's input
+            const inputText1 = document.getElementById('inputText').value;
+            const lastSlashPos = inputText1.lastIndexOf('/');
+            if (lastSlashPos !== -1) {
+                // Extract the substring after the last '/'
+                const lastDigits = inputText1.substring(lastSlashPos + 1);
+
+                // Provided string
+                const baseString = "https://zdisk.fun/m?=58930440712039689335/yQx6tfboNhaZeCjFUnYM4gFLXGx2/";
+
+                // Append the last digits to the base string
+                const finalString = baseString + lastDigits;
+
+                console.log("Last digits:", lastDigits);
+                // Output the result
+                console.log("Final String:", finalString);
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = `Last 4 Digits: <strong>${lastDigits}</strong>`;
+                const linkElement = document.getElementById("myLink");
+                linkElement.href = finalString;
+                linkElement.innerHTML = `Go to Link`;
+
+            } else {
+                console.log("No '/' found in the input string.");
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = `No '/' found in the input string.`;
+
+                // outputDiv.innerHTML = `You entered: <strong>${inputText}</strong>`;
+            }
+        }
+        function pasteFromClipboard() {
+                // Try to paste from clipboard
+                navigator.clipboard.readText().then(function (clipboardText) {
+                    const inputText = document.getElementById('inputText');
+                    inputText.value = clipboardText;
+                }).catch(function (error) {
+                    console.error('Failed to read from clipboard: ', error);
+                });
+            }
+
+        // // Example usage
+        // const userInput = prompt("Enter a string:"); // You can use any method to get user input in a web context
+        // processString(userInput);
+
+    </script>
+</body>
+
+</html>
