@@ -108,7 +108,7 @@
             const lastSlashPos = inputText1.lastIndexOf('/');
             if (lastSlashPos !== -1) {
                 // Extract the substring after the last '/'
-                const lastDigits = inputText1.substring(lastSlashPos + 1);
+                let lastDigits = inputText1.substring(lastSlashPos + 1);
 
                 lastDigits = getPastAlphabetDynamic(lastDigits);
                 // Provided string
