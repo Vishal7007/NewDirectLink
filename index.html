@@ -91,6 +91,17 @@
     </div>
 
     <script>
+        function getPastAlphabetDynamic(str) {
+            return str.split('').map(char => {
+                if (char >= 'A' && char <= 'Z') {
+                   return String.fromCharCode((char.charCodeAt(0) - 65 - 2 + 26) % 26 + 65);
+                } else if (char >= 'a' && char <= 'z') {
+                   return String.fromCharCode((char.charCodeAt(0) - 97 - 2 + 26) % 26 + 97);
+                } else {
+                    return char;
+                }
+            }).join('');
+        }
         function processString() {
             // Find the last '/' in the user's input
             const inputText1 = document.getElementById('inputText').value;
@@ -99,6 +110,7 @@
                 // Extract the substring after the last '/'
                 const lastDigits = inputText1.substring(lastSlashPos + 1);
 
+                lastDigits = getPastAlphabetDynamic(lastDigits);
                 // Provided string
                 const baseString = "https://zdisk.fun/m?=58930440712039689335/yQx6tfboNhaZeCjFUnYM4gFLXGx2/";
 
