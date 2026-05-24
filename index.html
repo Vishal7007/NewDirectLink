@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no,
+        viewport-fit=cover">
 
     <meta name="theme-color"
         content="#0f172a">
@@ -16,6 +20,9 @@
 
     <meta name="apple-mobile-web-app-capable"
         content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
 
     <title>DirectLink</title>
 
@@ -48,20 +55,33 @@
     <style>
 
         * {
+
             margin: 0;
             padding: 0;
+
             box-sizing: border-box;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            touch-action: manipulation;
         }
 
         body {
-
-            min-height: 100vh;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            padding: 20px;
+            padding: 16px;
 
             font-family: 'Inter', sans-serif;
 
@@ -73,26 +93,31 @@
 
             color: white;
 
-            overflow-x: hidden;
+            position: fixed;
+
+            inset: 0;
         }
 
         .bg-blur {
 
             position: absolute;
 
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
 
             border-radius: 50%;
 
-            background: #2563eb;
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #7c3aed);
 
             filter: blur(120px);
 
-            opacity: 0.22;
+            opacity: 0.18;
 
-            top: -60px;
-            right: -100px;
+            top: -120px;
+            right: -120px;
         }
 
         .container {
@@ -100,11 +125,11 @@
             position: relative;
 
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
 
-            padding: 34px 26px;
+            padding: 28px 22px;
 
-            border-radius: 28px;
+            border-radius: 30px;
 
             background:
                 rgba(15, 23, 42, 0.72);
@@ -115,17 +140,19 @@
                 1px solid rgba(255,255,255,0.08);
 
             box-shadow:
-                0 20px 60px rgba(0,0,0,0.45);
+                0 25px 60px rgba(0,0,0,0.45);
+
+            overflow: hidden;
         }
 
         .logo {
 
-            width: 72px;
-            height: 72px;
+            width: 78px;
+            height: 78px;
 
             margin: auto;
 
-            border-radius: 22px;
+            border-radius: 24px;
 
             background:
                 linear-gradient(135deg,
@@ -136,20 +163,20 @@
             justify-content: center;
             align-items: center;
 
-            font-size: 30px;
+            font-size: 34px;
 
             box-shadow:
-                0 10px 30px rgba(37,99,235,0.45);
+                0 14px 35px rgba(37,99,235,0.45);
         }
 
         h1 {
 
             margin-top: 22px;
 
+            text-align: center;
+
             font-size: 38px;
             font-weight: 800;
-
-            text-align: center;
 
             letter-spacing: -1px;
         }
@@ -162,9 +189,9 @@
 
             color: #94a3b8;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .input-box {
@@ -175,19 +202,17 @@
         textarea {
 
             width: 100%;
-            height: 150px;
+            height: 145px;
 
             padding: 18px;
 
-            border-radius: 18px;
+            border-radius: 20px;
 
             border:
                 1px solid rgba(255,255,255,0.08);
 
             background:
-                rgba(255,255,255,0.04);
-
-            backdrop-filter: blur(8px);
+                rgba(255,255,255,0.05);
 
             color: white;
 
@@ -197,19 +222,24 @@
 
             font-size: 15px;
 
+            font-family: 'Inter', sans-serif;
+
             transition: 0.25s;
+
+            overflow-y: auto;
         }
 
         textarea:focus {
 
             border:
-                1px solid rgba(59,130,246,0.7);
+                1px solid rgba(59,130,246,0.8);
 
             box-shadow:
-                0 0 0 4px rgba(37,99,235,0.15);
+                0 0 0 4px rgba(37,99,235,0.14);
         }
 
         textarea::placeholder {
+
             color: #64748b;
         }
 
@@ -228,7 +258,7 @@
 
             border: none;
 
-            border-radius: 16px;
+            border-radius: 18px;
 
             padding: 15px 16px;
 
@@ -238,6 +268,8 @@
             cursor: pointer;
 
             transition: 0.25s;
+
+            font-family: 'Inter', sans-serif;
         }
 
         .paste-btn {
@@ -267,31 +299,33 @@
             color: white;
 
             box-shadow:
-                0 12px 30px rgba(37,99,235,0.35);
+                0 14px 35px rgba(37,99,235,0.35);
         }
 
         .submit-btn:hover {
 
             transform: translateY(-2px);
-
-            opacity: 0.96;
         }
 
         #output {
 
-            margin-top: 26px;
+            margin-top: 22px;
 
-            padding: 16px;
+            padding: 18px;
 
             border-radius: 18px;
 
             background:
-                rgba(255,255,255,0.04);
+                rgba(255,255,255,0.05);
 
             border:
                 1px solid rgba(255,255,255,0.06);
 
             color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.5;
 
             word-break: break-word;
 
@@ -302,71 +336,47 @@
 
             color: #60a5fa;
 
-            font-size: 14px;
+            font-size: 13px;
 
             margin-bottom: 8px;
-        }
-
-        #myLink {
-
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            width: 100%;
-
-            margin-top: 18px;
-
-            padding: 16px;
-
-            border-radius: 16px;
-
-            background:
-                linear-gradient(135deg,
-                    #0ea5e9,
-                    #2563eb);
-
-            color: white;
-
-            text-decoration: none;
 
             font-weight: 600;
-
-            transition: 0.25s;
-
-            box-shadow:
-                0 10px 25px rgba(14,165,233,0.3);
-        }
-
-        #myLink:hover {
-
-            transform: translateY(-2px);
         }
 
         .footer {
 
-            margin-top: 22px;
+            margin-top: 24px;
 
             text-align: center;
 
-            font-size: 13px;
+            font-size: 12px;
 
             color: #64748b;
         }
 
         @media(max-width: 520px) {
 
+            body {
+                padding: 12px;
+            }
+
+            .container {
+
+                padding: 24px 18px;
+
+                border-radius: 24px;
+            }
+
             h1 {
                 font-size: 32px;
             }
 
-            .container {
-                padding: 26px 18px;
-            }
-
             .buttons {
                 flex-direction: column;
+            }
+
+            button {
+                width: 100%;
             }
         }
 
@@ -427,12 +437,6 @@
 
         <div id="output"></div>
 
-        <a id="myLink"
-            target="_blank"
-            style="display:none;">
-            Open Direct Link
-        </a>
-
         <div class="footer">
             Fast • Secure • Minimal
         </div>
@@ -468,23 +472,22 @@
         function processString() {
 
             const inputText1 =
-                document.getElementById('inputText').value.trim();
+                document.getElementById('inputText')
+                .value
+                .trim();
 
             const outputDiv =
                 document.getElementById('output');
-
-            const linkElement =
-                document.getElementById('myLink');
 
             if (!inputText1) {
 
                 outputDiv.style.display = 'block';
 
                 outputDiv.innerHTML =
-                    `<div class="result-title">Error</div>
+                    `<div class="result-title">
+                        Error
+                    </div>
                     Please paste a valid URL.`;
-
-                linkElement.style.display = 'none';
 
                 return;
             }
@@ -510,25 +513,36 @@
 
                 outputDiv.innerHTML =
                     `<div class="result-title">
-                        Generated Successfully
+                        Opening Browser...
                     </div>
-                    ${lastDigits}`;
+                    Redirecting to generated direct link.`;
 
-                linkElement.href =
-                    finalString;
+                // Vibration feedback for Android
 
-                linkElement.style.display =
-                    'inline-flex';
+                if (navigator.vibrate) {
+                    navigator.vibrate(40);
+                }
+
+                // Open in external browser
+
+                setTimeout(() => {
+
+                    window.open(
+                        finalString,
+                        '_blank'
+                    );
+
+                }, 350);
 
             } else {
 
                 outputDiv.style.display = 'block';
 
                 outputDiv.innerHTML =
-                    `<div class="result-title">Invalid URL</div>
+                    `<div class="result-title">
+                        Invalid URL
+                    </div>
                     No '/' found in the input string.`;
-
-                linkElement.style.display = 'none';
             }
         }
 
@@ -538,8 +552,8 @@
 
                 .then(function (clipboardText) {
 
-                    document.getElementById('inputText').value =
-                        clipboardText;
+                    document.getElementById('inputText')
+                        .value = clipboardText;
 
                 })
 
@@ -552,6 +566,17 @@
 
                 });
         }
+
+        // Auto focus textarea
+
+        window.onload = () => {
+
+            document
+                .getElementById('inputText')
+                .focus();
+        };
+
+        // Service Worker
 
         if ('serviceWorker' in navigator) {
 
