@@ -1,21 +1,26 @@
 {
-  "name": "Get Direct Link",
+  "name": "DirectLink",
   "short_name": "DirectLink",
-  "start_url": "/",
+  "description": "Generate direct links instantly from shared URLs.",
+  "start_url": "/NewDirectLink/",
+  "scope": "/NewDirectLink/",
   "display": "standalone",
   "background_color": "#222222",
   "theme_color": "#222222",
   "orientation": "portrait",
+
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/NewDirectLink/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/NewDirectLink/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
