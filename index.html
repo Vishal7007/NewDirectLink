@@ -2,39 +2,70 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+        content="#222222">
 
     <title>Get Direct Link</title>
 
-    <meta name="theme-color" content="#222222">
+    <!-- PWA -->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="manifest"
+        href="site.webmanifest">
+
+    <!-- Icons -->
+
+    <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="apple-touch-icon.png">
+
+    <link rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="favicon-32x32.png">
+
+    <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="favicon-16x16.png">
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #222;
-            color: #fff;
+
             margin: 0;
+            padding: 20px;
+
+            font-family: Arial, sans-serif;
+
+            background-color: #222;
+            color: white;
+
+            text-align: center;
         }
 
         .container {
-            background-color: #333;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+
             max-width: 450px;
-            margin: 0 auto;
+
+            margin: auto;
+
+            background: #333;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
         }
 
         h1 {
@@ -42,63 +73,75 @@
         }
 
         textarea {
+
             width: 100%;
+
             padding: 12px;
+
             border: 1px solid #555;
+
             border-radius: 8px;
-            background-color: #444;
-            color: #fff;
+
+            background: #444;
+
+            color: white;
+
             resize: vertical;
-            margin-bottom: 15px;
+
             font-size: 15px;
+
+            margin-bottom: 15px;
         }
 
         button {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 12px 18px;
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin-top: 10px;
+
             border: none;
+
             border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
+
+            background: #007BFF;
+
+            color: white;
+
             font-size: 15px;
+
+            cursor: pointer;
         }
 
         button:hover {
-            opacity: 0.9;
-        }
-
-        a {
-            color: #00a2ff;
-            text-decoration: none;
+            opacity: 0.92;
         }
 
         #output {
+
             margin-top: 20px;
+
             word-break: break-word;
         }
 
         #myLink {
+
             display: inline-block;
+
             margin-top: 15px;
+
+            color: #00a2ff;
+
             font-size: 18px;
+
+            text-decoration: none;
         }
 
         .apk-btn {
-            display: inline-block;
             margin-top: 20px;
         }
 
-        @media screen and (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 15px;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
     </style>
 
 </head>
@@ -111,32 +154,47 @@
 
         <form onsubmit="processString(); return false;">
 
-            <textarea id="inputText"
-                placeholder="Paste your URL here..."
-                rows="4"></textarea>
+            <textarea
+                id="inputText"
+                rows="4"
+                placeholder="Paste your URL here..."></textarea>
 
-            <button type="button" onclick="pasteFromClipboard()">
+            <button
+                type="button"
+                onclick="pasteFromClipboard()">
+
                 Paste
+
             </button>
 
             <button type="submit">
+
                 Submit
+
             </button>
 
         </form>
 
         <div id="output"></div>
 
-        <a id="myLink" target="_blank"></a>
+        <a id="myLink"
+            target="_blank"></a>
 
-        <br>
+        <!-- APK DOWNLOAD -->
 
-        <!-- APK DOWNLOAD BUTTON -->
-        <a href="app.apk" download class="apk-btn">
-            <button type="button">
-                Download APK
-            </button>
-        </a>
+        <div class="apk-btn">
+
+            <a href="app.apk" download>
+
+                <button type="button">
+
+                    Download APK
+
+                </button>
+
+            </a>
+
+        </div>
 
     </div>
 
@@ -188,10 +246,6 @@
                 const finalString =
                     baseString + lastDigits;
 
-                console.log("Last digits:", lastDigits);
-
-                console.log("Final String:", finalString);
-
                 const outputDiv =
                     document.getElementById('output');
 
@@ -201,7 +255,8 @@
                 const linkElement =
                     document.getElementById("myLink");
 
-                linkElement.href = finalString;
+                linkElement.href =
+                    finalString;
 
                 linkElement.innerHTML =
                     `Open Direct Link`;
@@ -222,40 +277,47 @@
 
                 .then(function (clipboardText) {
 
-                    const inputText =
-                        document.getElementById('inputText');
+                    document.getElementById('inputText').value =
+                        clipboardText;
 
-                    inputText.value = clipboardText;
                 })
 
                 .catch(function (error) {
 
                     console.error(
-                        'Failed to read clipboard: ',
+                        'Clipboard read failed:',
                         error
                     );
+
                 });
         }
 
-        // Register Service Worker
+        // SERVICE WORKER
 
         if ('serviceWorker' in navigator) {
 
             window.addEventListener('load', () => {
 
                 navigator.serviceWorker
-                    .register('/sw.js')
+                    .register('sw.js')
 
-                    .then(reg => {
-                        console.log('Service Worker Registered');
+                    .then(() => {
+
+                        console.log(
+                            'Service Worker Registered'
+                        );
+
                     })
 
                     .catch(err => {
+
                         console.log(
-                            'Service Worker Failed',
+                            'Service Worker Error:',
                             err
                         );
+
                     });
+
             });
         }
 
